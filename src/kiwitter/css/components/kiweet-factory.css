@@ -1,11 +1,11 @@
-.nweet-factory-form {
+.kiweet-factory-form {
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 100%;
 }
 
-.nweet-factory-input__container {
+.kiweet-factory-input__container {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -15,7 +15,9 @@
   width: 100%;
 }
 
-.nweet-factory-input__input {
+.kiweet-factory-input__input {
+  all: unset;
+  box-sizing: border-box;
   flex-grow: 1;
   height: 40px;
   padding: 0px 20px;
@@ -26,7 +28,8 @@
   font-size: 12px;
 }
 
-.nweet-factory-input__arrow {
+.kiweet-factory-input__arrow {
+  all: unset;
   position: absolute;
   right: 0;
   background-color: #04aaff;
@@ -39,35 +42,35 @@
   box-sizing: border-box;
 }
 
-.nweet-factory-input__label {
+.kiweet-factory-input__label {
   color: #04aaff;
   cursor: pointer;
 }
 
-.nweet-factory-input__label span {
+.kiweet-factory-input__label span {
   margin-right: 10px;
   font-size: 12px;
 }
 
-.nweet-factory-form__attachment {
+.kiweet-factory-form__attachment {
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
 
-.nweet-factory-form__attachment img {
+.kiweet-factory-form__attachment img {
   height: 80px;
   width: 80px;
   border-radius: 40px;
 }
 
-.nweet-factory-form__attachment__clear {
+.kiweet-factory-form__attachment__clear {
   color: #04aaff;
   cursor: pointer;
   text-align: center;
 }
 
-.nweet-factory-form__attachment__clear span {
+.kiweet-factory-form__attachment__clear span {
   margin-right: 10px;
   font-size: 12px;
 }

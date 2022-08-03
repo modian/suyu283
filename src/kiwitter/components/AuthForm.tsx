@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { auth } from 'firebaseSetup';
+import { auth } from 'kiwitter/firebaseSetup';
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
@@ -11,10 +11,11 @@ const AuthForm = () => {
   const [newAccount, setNewAccount] = useState(true);
   const [error, setError] = useState('');
 
-  const onChange = (event: any) => {
-    const {
-      target: { name, value },
-    } = event;
+  const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    // const {
+    //   target: { name, value },
+    // } = event;
+    const { name, value } = event.target;
     if (name === 'email') {
       setEmail(value);
     } else if (name === 'password') {
@@ -22,7 +23,7 @@ const AuthForm = () => {
     }
   };
 
-  const onSubmit = async (event: any) => {
+  const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     try {
       let data;

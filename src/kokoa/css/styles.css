@@ -1,0 +1,32 @@
+@import "kokoa/css/reset.css";
+@import "kokoa/css/variables.css";
+
+/* Components */
+@import "kokoa/css/components/status-bar.css";
+@import "kokoa/css/components/nav-bar.css";
+@import "kokoa/css/components/screen-header.css";
+@import "kokoa/css/components/alt-screen-header.css";
+@import "kokoa/css/components/user-component.css";
+@import "kokoa/css/components/badge.css";
+@import "kokoa/css/components/icon-row.css";
+@import "kokoa/css/components/no-mobile.css";
+
+/* Screens */
+@import "kokoa/css/screens/login.css";
+@import "kokoa/css/screens/friends.css";
+@import "kokoa/css/screens/find.css";
+@import "kokoa/css/screens/more.css";
+@import "kokoa/css/screens/settings.css";
+@import "kokoa/css/screens/chat.css";
+
+.kokoa-body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  background-color: white;
+  color: #2e363e;
+  height: 100vh;
+  /* width: 100vw; */
+}
+
+.main-screen {
+  padding: 0px var(--horizontal-space);
+}

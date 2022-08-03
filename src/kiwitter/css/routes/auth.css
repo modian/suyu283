@@ -8,7 +8,7 @@
 
 .authBtns {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   width: 100%;
   max-width: 320px;
 }

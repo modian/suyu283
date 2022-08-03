@@ -1,0 +1,61 @@
+@import "kiwitter/css/_reset.css";
+@import "kiwitter/css/_variables.css";
+
+/* Components */
+@import "kiwitter/css/components/auth-form.css";
+@import "kiwitter/css/components/navigation.css";
+@import "kiwitter/css/components/kiweet.css";
+@import "kiwitter/css/components/kiweet-factory.css";
+
+/* Routes */
+@import "kiwitter/css/routes/auth.css";
+@import "kiwitter/css/routes/home.css";
+@import "kiwitter/css/routes/profile.css";
+
+.kiwitter-body {
+  background-color: black;
+  color: white;
+  font-size: 14px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 30px 150px;
+  border-radius: 20px;
+}
+
+.kiwitter-footer {
+  display: flex;
+  justify-content: center;
+  margin: 30px;
+}
+
+.formInput {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 10px 20px;
+  border-radius: 20px;
+  border: 1px solid black;
+  text-align: center;
+  background-color: white;
+  color: black;
+}
+
+.formBtn {
+  box-sizing: border-box;
+  cursor: pointer;
+  width: 100%;
+  padding: 7px 20px;
+  text-align: center;
+  color: white;
+  border-radius: 20px;
+  background-color: #04aaff;
+  cursor: pointer;
+}
+
+.cancelBtn {
+  cursor: pointer;
+  background-color: tomato;
+}
+
+

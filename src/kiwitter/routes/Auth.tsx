@@ -1,23 +1,22 @@
-import React, { useState } from 'react';
-import { auth } from 'firebaseSetup';
+import { auth } from 'kiwitter/firebaseSetup';
 import {
   GoogleAuthProvider,
   GithubAuthProvider,
   signInWithPopup,
 } from 'firebase/auth';
-import AuthForm from 'components/AuthForm';
+import AuthForm from 'kiwitter/components/AuthForm';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-  faTwitter,
-  faGoogle,
-  faGithub,
-} from '@fortawesome/free-brands-svg-icons';
+import { faGoogle } from '@fortawesome/free-brands-svg-icons';
+import { faKissWinkHeart } from '@fortawesome/free-solid-svg-icons';
+import React from 'react';
 
 const Auth = () => {
-  const onSocialClick = async (event: any) => {
-    const {
-      target: { name },
-    } = event;
+  const onSocialClick = async (event: React.MouseEvent<HTMLButtonElement>) => {
+    // const {
+    //   target: { name },
+    // } = event; //const name = event.target.name
+    const { name } = event.target as any;
+
     let provider;
     try {
       if (name === 'google') {
@@ -45,7 +44,7 @@ const Auth = () => {
   return (
     <div className="authContainer">
       <FontAwesomeIcon
-        icon={faTwitter}
+        icon={faKissWinkHeart}
         color={'#04AAFF'}
         size="3x"
         style={{ marginBottom: 30 }}
@@ -54,9 +53,6 @@ const Auth = () => {
       <div className="authBtns">
         <button onClick={onSocialClick} name="google" className="authBtn">
           Continue with Google <FontAwesomeIcon icon={faGoogle} />
-        </button>
-        <button onClick={onSocialClick} name="github" className="authBtn">
-          Continue with Github <FontAwesomeIcon icon={faGithub} />
         </button>
       </div>
     </div>

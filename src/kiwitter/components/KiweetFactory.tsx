@@ -1,21 +1,23 @@
 import React, { useState } from 'react';
 import { v4 } from 'uuid';
-import { db, storage } from 'firebaseSetup';
+import { auth, db, storage } from 'kiwitter/firebaseSetup';
 import { addDoc, collection, Timestamp } from 'firebase/firestore';
 import { ref, uploadString, getDownloadURL } from 'firebase/storage';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus, faTimes } from '@fortawesome/free-solid-svg-icons';
 
-const NweetFactory = ({ userObj }: any) => {
-  const [nweet, setNweet] = useState('');
+const KiweetFactory = () => {
+  const [kiweet, setKiweet] = useState('');
   const [attachment, setAttachment] = useState('');
 
-  const onSubmit = async (event: any) => {
+  const user = auth.currentUser;
+
+  const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     let attachmentURL = '';
 
     if (attachment !== '') {
-      const attachmentRef = ref(storage, `${userObj.uid}/${v4()}`);
+      const attachmentRef = ref(storage, `${(user && user.uid)}/${v4()}`);
       const response = await uploadString(
         attachmentRef,
         attachment,
@@ -25,63 +27,68 @@ const NweetFactory = ({ userObj }: any) => {
     }
 
     try {
-      const docRef = await addDoc(collection(db, 'nweets'), {
-        text: nweet,
+      const docRef = await addDoc(collection(db, 'kiweets'), {
+        text: kiweet,
         createdAt: Timestamp.now(),
-        creatorId: userObj.uid,
+        creatorId: (user && user.uid),
         attachmentURL,
       });
     } catch (error) {
       console.error('Error adding document:', error);
     }
-    if (nweet !== '') {
-      setNweet('');
+
+    if (kiweet !== '') {
+      setKiweet('');
       setAttachment('');
     }
   };
 
-  const onChange = (event: any) => {
-    const {
-      target: { value },
-    } = event;
-    setNweet(value);
+  const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    // const {
+    //   target: { value },
+    // } = event;
+    const { value } = event.target;
+    setKiweet(value);
   };
 
-  const onFileChange = (event: any) => {
-    const {
-      target: { files },
-    } = event;
-    const theFile = files[0];
-    const reader = new FileReader();
-    reader.onloadend = (finishedEvent: any) => {
-      const {
-        currentTarget: { result },
-      } = finishedEvent;
-      setAttachment(result);
-    };
-    reader.readAsDataURL(theFile);
+  const onFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    // const {
+    //   target: { files },
+    // } = event;
+    const { files } = event.target;
+    if (files) {
+      const theFile = files[0];
+      const reader = new FileReader();
+      reader.onloadend = (finishedEvent: any) => {
+        const {
+          currentTarget: { result },
+        } = finishedEvent;
+        setAttachment(result);
+      };
+      reader.readAsDataURL(theFile);
+    }
   };
 
   const onClearAttachment = () => setAttachment('');
 
   return (
-    <form onSubmit={onSubmit} className="nweet-factory-form">
-      <div className="nweet-factory-input__container">
+    <form onSubmit={onSubmit} className="kiweet-factory-form">
+      <div className="kiweet-factory-input__container">
         <input
-          value={nweet}
+          value={kiweet}
           onChange={onChange}
           type="text"
           placeholder="What's on your mind?"
           maxLength={120}
-          className="nweet-factory-input__input"
+          className="kiweet-factory-input__input"
         />
         <input
           type="submit"
           value="&rarr;"
-          className="nweet-factory-input__arrow"
+          className="kiweet-factory-input__arrow"
         />
       </div>
-      <label htmlFor="attach-file" className="nweet-factory-input__label">
+      <label htmlFor="attach-file" className="kiweet-factory-input__label">
         <span>Add photos</span>
         <FontAwesomeIcon icon={faPlus} />
       </label>
@@ -95,7 +102,7 @@ const NweetFactory = ({ userObj }: any) => {
         }}
       />
       {attachment && (
-        <div className="nweet-factory-form__attachment">
+        <div className="kiweet-factory-form__attachment">
           <img
             src={attachment}
             style={{
@@ -103,7 +110,7 @@ const NweetFactory = ({ userObj }: any) => {
             }}
           />
           <div
-            className="nweet-factory-form__attachment__clear"
+            className="kiweet-factory-form__attachment__clear"
             onClick={onClearAttachment}
           >
             <span>Remove</span>
@@ -115,4 +122,4 @@ const NweetFactory = ({ userObj }: any) => {
   );
 };
 
-export default NweetFactory;
+export default KiweetFactory;
